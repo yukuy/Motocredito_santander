@@ -7,5 +7,6 @@ with app.app_context():
     print("Tablas creadas con éxito.")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Obtener el puerto de la variable de entorno PORT
+    app.run(host='0.0.0.0', port=port)  # Cambiar a '0.0.0.0' para permitir conexiones externas
 
