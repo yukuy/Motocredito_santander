@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Historial de Búsqueda</title>
+    <style>
+
+        .container {
+            flex: 1;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%
+        }
+
+        /* Estilo de historial vacío */
+        .no-history {
+            text-align: center;
+            color: #666;
+        }
+        li:last-child {
+            border-bottom: none;}
+        
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        /* Quitar el estilo de enlace y hacerlo texto normal */
+        a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: normal;
+        }
+
+        a:hover {
+            cursor: default;
+            color: inherit;
+        }
+
+
+    </style>
+</head>
+<body>
+    {% extends 'admin/admin_dashboard.html' %}
+    {% block content %}
+    <div class="container">
+        <h1>Historial de Búsqueda</h1>
+        <ul>
+            {% if historial_busqueda %}
+                {% for busqueda in historial_busqueda %}
+                    <li><a href="{{ url_for('buscar_motos') }}?query={{ busqueda }}">{{ busqueda }}</a></li>
+                {% endfor %}
+            {% else %}
+                <li class="no-history">No hay historial de búsqueda.</li>
+            {% endif %}
+        </ul>
+    </div>
+    {% endblock %}
+
+    <!-- Footer fijo en la parte inferior -->
+    <footer>
+        <p>Footer contenido &copy; 2024</p>
+    </footer>
+</body>
+</html>

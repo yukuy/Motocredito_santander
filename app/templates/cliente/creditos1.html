@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créditos</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #2980b9;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .credit-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .credit-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .credit-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .credit-card h3 {
+            margin-top: 0;
+            color: #2980b9;
+        }
+
+        .credit-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .credit-card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #2980b9;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .credit-card a:hover {
+            background-color: #1f6397;
+        }
+
+        .partners {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .partners img {
+            width: 150px; /* Ancho fijo */
+            height: 50px; /* Alto fijo */
+            margin: 0 20px;
+            vertical-align: middle;
+        }
+
+        .contact-section {
+            background-color: #2980b9;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .contact-section h3 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .contact-section p {
+            font-size: 1.2rem;
+        }
+
+        .contact-section a {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    {% extends "cliente/cliente_dashboard.html" %}
+    {% block content %}
+        <div class="container">
+            <h2>Nuestras Opciones de Crédito</h2>
+            <div class="credit-options">
+                <div class="credit-card">
+                    <h3>Banco de Bogotá</h3>
+                    <p>Financia tu próxima moto con tasas competitivas y plazos ajustables a tus necesidades. Créditos disponibles para motos nuevas y usadas.</p>
+                    <a href="#">Solicitar ahora</a>
+                </div>
+                <div class="credit-card">
+                    <h3>Bancolombia</h3>
+                    <p>Accede a créditos flexibles para motos de cualquier marca. Ofrecemos pagos cómodos y rápidos procesos de aprobación.</p>
+                    <a href="#">Más información</a>
+                </div>
+                <div class="credit-card">
+                    <h3>BBVA</h3>
+                    <p>Con BBVA puedes obtener tu moto con financiamiento en cuotas asequibles y tasas reducidas. Aprobación en 24 horas.</p>
+                    <a href="#">Conoce más</a>
+                </div>
+                <div class="credit-card">
+                    <h3>Davivienda</h3>
+                    <p>Financia el 100% del valor de tu moto con Davivienda. Plazos de hasta 60 meses con tasas preferenciales para clientes nuevos.</p>
+                    <a href="#">Ver condiciones</a>
+                </div>
+            </div>
+
+            <section class="partners">
+                <h2>Trabajamos con las Mejores Entidades Financieras</h2>
+                <img src="{{ url_for('static', filename='uploads/colo.png') }}" alt="Bancolombia">
+                <img src="{{ url_for('static', filename='uploads/bbva.jpeg') }}" alt="BBVA">
+                <img src="{{ url_for('static', filename='uploads/davivi.png') }}" alt="Davivienda">
+                <img src="{{ url_for('static', filename='uploads/bogo.png') }}" alt="Banco de Bogotá">
+            </section>
+        </div>
+    {% endblock content %}
+</body>
+</html>

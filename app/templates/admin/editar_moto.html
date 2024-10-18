@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actualizar</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(to bottom, #000000, #4d4d4d); /* Degradado de negro a gris */
+            overflow-y: auto; /* Añadido para permitir desplazamiento si es necesario */
+        }
+
+        .background-container {
+            padding: 1.5rem;
+            background-image: url('{{ url_for('static', filename='uploads/moto-1.gif') }}');
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            text-align: left;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        select,
+        textarea {
+            width: 100%;
+            max-width: 300px;
+            padding: 0.8rem;
+            margin: 0 auto 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        img {
+            margin: 0 auto 1rem;
+            max-width: 100px;
+            display: block;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            max-width: 300px;
+            padding: 0.8rem;
+            background-color: #1f618d;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 1rem auto 0;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #555;
+        }
+
+        /* Asegurar que el contenido no se corte en pantallas pequeñas */
+        @media (min-height: 500px) {
+            body {
+                align-items: flex-start; /* Alinear hacia arriba en lugar de centrar */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-container">
+        <div class="container">
+            <h2>Editar Moto</h2>
+            <form method="post" enctype="multipart/form-data">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="{{ motos.nombre }}" required><br>
+
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca" value="{{ motos.marca }}" required><br>
+
+                <label for="cilindrada">Cilindrada:</label>
+                <input type="text" id="cilindrada" name="cilindrada" value="{{ motos.cilindrada }}" required><br>
+
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" name="cantidad" value="{{ motos.cantidad }}" required><br>
+
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" name="precio" value="{{ motos.precio }}" required><br>
+
+                <label for="foto">Foto:</label>
+                <input type="file" id="foto" name="foto" accept="image/*"><br>
+                {% if motos.foto %}
+                <img src="{{ url_for('static', filename='uploads/' ~ motos.foto) }}" alt="Foto de {{ motos.nombre }}" width="100"><br>
+                {% endif %}
+
+                <label for="video_url">Enlace del video promocional:</label>
+                <input type="text" name="video_url" value="{{ motos.video_url }}" placeholder="URL del video de YouTube"><br>
+
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" required>{{ motos.descripcion }}</textarea><br>
+
+                <button type="submit">Actualizar Moto</button>
+            </form>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies (jQuery and Popper.js) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

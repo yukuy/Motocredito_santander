@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de la Moto</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        .informaciongeneral{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            border-radius: 8px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .calificacion-contenedor{
+            margin: 20px auto;
+            text-align: center;
+            background-color: #f0f8ff; 
+            padding: 10px; 
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 2px solid #00bfa5; 
+            max-width: 500px; 
+        }
+        
+        .calificacion-contenedor h2 {
+            color: #444; 
+            margin-bottom: 5px; 
+        }
+        
+        .moto-details {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            flex: 1 1 48%;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .moto-details img {
+            border-radius: 8px;
+            margin-bottom: 15px;
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .embed-responsive {
+            position: relative;
+            width: 100%;
+            max-width: 800px; 
+            height: 0;
+            padding-bottom: 35%; 
+            margin: 0 auto; 
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #000; 
+        }
+
+        .embed-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .moto-details p, .infovendedor p {
+            margin: 10px 0;
+            color: #666;
+        }
+    
+        .comentarios {
+            margin-top: 20px;
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        .comentarios h4 {
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        .comentarios p {
+            margin: 5px 0;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .calificacion-contenedor {
+            margin: 20px 0;
+            text-align: center;  
+            background-color: #f0f8ff;  
+            padding: 20px;  
+            border-radius: 15px;  
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+            border: 2px solid #00bfa5;  
+        }
+
+        .rating {
+            direction: rtl;  
+            unicode-bidi: bidi-override;  
+            display: inline-block;
+        }
+
+        .rating input {
+            display: none;  
+        }
+
+        .rating label {
+            font-size: 2.5em;  
+            color: #ccc;  
+            cursor: pointer;  
+            transition: color 0.3s ease;  
+        }
+
+        .rating input:checked ~ label {
+            color: #ff9800;  
+        }
+
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: #ff9800;  
+        }
+        
+        .infovendedor {
+            display: flex;               /* Habilita flexbox */
+            flex-direction: column;      /* Organiza los elementos en columna */
+            align-items: center;         /* Centra los elementos horizontalmente */
+            justify-content: center;     /* Centra los elementos verticalmente */
+            margin: 20px auto;          /* Centra el contenedor */
+            text-align: center;          /* Alineación de texto */
+            background-color: #f0f8ff;  /* Color de fondo */
+            padding: 20px;              /* Espaciado interno */
+            border-radius: 10px;        /* Bordes redondeados */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            border: 2px solid #00bfa5;  /* Borde color turquesa */
+            max-width: 500px;           /* Ancho máximo */
+        }
+
+        .whatsapp-logo {
+            display: flex;               /* Habilita flexbox para centrar contenido */
+            justify-content: center;     /* Centra el contenido horizontalmente */
+            margin-top: 30px;
+            margin-left: -60px;
+        }
+
+        .whatsapp-logo img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            animation: jump 1.5s infinite;
+        }
+
+        @keyframes jump {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        } 
+
+        .user-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 70px;
+            margin-left: -20px;
+        }
+
+        .logo{
+            display:flex;
+        }
+
+        .datos {
+            text-align: left; 
+            margin-left: 10px; 
+            margin-top: 40px; 
+        }
+    </style>
+</head>
+<body>
+    {% extends "admin/admin_dashboard.html" %}
+    {% block content %}
+    
+    <div class="informaciongeneral">
+        <div class="moto-details">
+            <h1>Información de {{ moto.nombre }}</h1>
+
+            <!-- Verificar si hay un video -->
+            {% if video_url %}
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="{{ video_url }}" allow="autoplay; fullscreen"></iframe>
+                </div>
+            {% else %}
+                <!-- Si no hay video, mostrar la imagen de la moto -->
+                <img src="{{ moto.foto }}" alt="Foto de {{ moto.nombre }}" style="max-width: 100%; height: auto;">
+            {% endif %}
+            
+            <p>Precio: {{ moto.precio }}</p>
+            <p>Disponibles: {{ moto.cantidad }}</p>
+            <p>Cilindrada: {{moto.cilindrada}}</p>
+            <p>Marca: {{moto.marca}}</p>
+            <label for="descripcion">Descripción:</label>
+            <p>{{ moto.descripcion }}</p><br>
+        
+            <!-- Mostrar comentarios existentes -->
+            <div class="comentarios">
+                <h4>Comentarios</h4>
+                {% for comentario in comentarios %}
+                    <p>{{ comentario.usuario.nombre }}: {{ comentario.comentario }}</p>
+                {% endfor %}
+            </div>
+        
+            <!-- Formulario para agregar un comentario -->
+            <form action="{{ url_for('add_comentario', moto_id=moto.id) }}" method="POST">
+                <textarea name="comentario" placeholder="Escribe tu comentario aquí..." required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+
+        <!-- Calificar al vendedor -->
+        <div class="calificacion-contenedor">
+            <form action="{{ url_for('agregar_calificacion', vendedor_id=vendedor.id) }}" method="POST">
+                <label for="calificacion">Calificación:</label>
+                <div class="rating">
+                    <input type="radio" id="star5" name="calificacion" value="5" />
+                    <label for="star5" title="5 estrellas">☆</label>
+        
+                    <input type="radio" id="star4" name="calificacion" value="4" />
+                    <label for="star4" title="4 estrellas">☆</label>
+        
+                    <input type="radio" id="star3" name="calificacion" value="3" />
+                    <label for="star3" title="3 estrellas">☆</label>
+        
+                    <input type="radio" id="star2" name="calificacion" value="2" />
+                    <label for="star2" title="2 estrellas">☆</label>
+        
+                    <input type="radio" id="star1" name="calificacion" value="1" />
+                    <label for="star1" title="1 estrella">☆</label>
+                </div>
+                <button type="submit">Enviar Calificación</button>
+            </form>
+        </div>
+
+        <!-- Información del vendedor -->
+        <div class="infovendedor">
+            <h2>Información del Vendedor</h2>
+            <div class="logo">
+                {% if vendedor.foto.startswith('http') %}
+                    <!-- Mostrar la imagen subida a Cloudinary si es una URL -->
+                    <img src="{{ vendedor.foto }}" alt="Foto de {{ vendedor.nombre }}" style=" width: 100px; height: 100px; border-radius: 50%;">
+                {% else %}
+                    <!-- Mostrar la imagen predeterminada si no es una URL (local) -->
+                    <img src="{{ url_for('static', filename='uploads/perfil.jpg') }}" alt="Foto predeterminada del vendedor" style=" width: 100px; height: 100px; border-radius: 50%;">
+                {% endif %}                
+                <div class="datos">
+                    <p>Nombre: {{ vendedor.nombre }}</p>
+                    <p>Teléfono: {{ vendedor.telefono }}</p>
+                    <p>Correo: {{ vendedor.correo }}</p>
+                    <div class="whatsapp-logo">
+                        <a href="https://wa.me/57{{ vendedor.telefono }}?text=Hola,%20estoy%20interesado%20en%20la%20moto%20{{ moto.nombre }}" target="_blank">
+                            <img src="{{ url_for('static', filename='uploads/logo whatsapp.jpg') }}" alt="WhatsApp Logo">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    {% endblock %}
+</body>
+</html>
