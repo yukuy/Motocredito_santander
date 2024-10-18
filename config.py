@@ -3,7 +3,7 @@ from datetime import timedelta
 import cloudinary
 
 class config:
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///compraventa.db'  # Cambia a SQLite con un archivo local llamado database.db
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///motocredito.db'  # Cambia a SQLite con un archivo local llamado database.db
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'tu_clave_secreta_fija_aqui'
     PERMANENT_SESSION_LIFETIME = timedelta(days=7)
