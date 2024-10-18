@@ -55,6 +55,7 @@ def login():
             session['user_id'] = usuario.id
             session['user_nombre'] = usuario.nombre
             session['user_role'] = usuario.role
+            session.permanent = True  # Marca la sesión como permanente
 
             if usuario.role == 'admin':
                 return redirect(url_for('admin_dashboard'))
@@ -68,9 +69,7 @@ def login():
 #serrar sesión
 @app.route('/logout')
 def logout():
-    session.pop('user_id', None)
-    session.pop('user_nombre', None)
-    session.pop('user_role', None)
+    session.clear()  # Elimina toda la información de la sesión
     flash('Sesión cerrada correctamente', 'success')
     return redirect(url_for('login'))
 
@@ -81,12 +80,20 @@ def admin_dashboard():
         flash('Acceso no autorizado', 'danger')
         return redirect(url_for('login'))
     
+    if 'user_id' not in session:
+        flash('Por favor, inicia sesión primero', 'warning')
+        return redirect(url_for('login'))
+    
     return render_template('admin/admin_dashboard.html', user=session['user_nombre'])
 
 @app.route('/cliente_dashboard')
 def cliente_dashboard():
     if 'user_role' not in session or session['user_role'] != 'cliente':
         flash('Acceso no autorizado', 'danger')
+        return redirect(url_for('login'))
+    
+    if 'user_id' not in session:
+        flash('Por favor, inicia sesión primero', 'warning')
         return redirect(url_for('login'))
     
     return render_template('cliente/cliente_dashboard.html', user=session['user_nombre'])
