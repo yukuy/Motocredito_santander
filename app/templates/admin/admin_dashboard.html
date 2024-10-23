@@ -223,9 +223,8 @@
         <ul class="navbar-nav me-auto">
           <br>
           {% if session.get('user_id') and usuario %}
-          <p>{{ usuario.foto }}</p> <!-- Depuración para ver el valor de la imagen -->
               <a href="{{ url_for('perfil_usuario', user_id=session['user_id']) }}">
-                  <img src="{% if usuario.foto %}{{ usuario.foto }}{% else %}{{ url_for('static', filename='uploads/perfil.jpg') }}{% endif %}" 
+                  <img src="{{ url_for('static', filename='uploads/perfil.jpg') if not usuario.foto else usuario.foto }}" 
                       alt="Logo de usuario" 
                       class="user-logo">
               </a>
@@ -292,6 +291,7 @@
     <div class="container">
       <div class="perfil">
         <h1>Bienvenido, {{ user }} </h1>
+
       </div>
       
       <h2>Destacadas</h2>

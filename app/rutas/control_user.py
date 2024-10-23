@@ -46,6 +46,15 @@ def register():
 #login
 @app.route('/', methods=['GET', 'POST'])
 def login():
+    #verificar si ya se inicio sesion
+    if 'user_id' in session:
+        # Obtener el rol del usuario de la sesión
+        user_role = session.get('user_role')
+        
+        if user_role == 'admin':
+            return redirect(url_for('admin_dashboard'))
+        else:
+            return redirect(url_for('cliente_dashboard'))
     if request.method == 'POST':
         correo = request.form['correo']
         password = request.form['password']
@@ -84,7 +93,9 @@ def admin_dashboard():
         flash('Por favor, inicia sesión primero', 'warning')
         return redirect(url_for('login'))
     
-    return render_template('admin/admin_dashboard.html', user=session['user_nombre'])
+    usuario = Usuario.query.get(session['user_id'])
+    
+    return render_template('admin/admin_dashboard.html', user=session['user_nombre'], usuario=usuario)
 
 @app.route('/cliente_dashboard')
 def cliente_dashboard():
@@ -95,5 +106,7 @@ def cliente_dashboard():
     if 'user_id' not in session:
         flash('Por favor, inicia sesión primero', 'warning')
         return redirect(url_for('login'))
+    
+    
     
     return render_template('cliente/cliente_dashboard.html', user=session['user_nombre'])

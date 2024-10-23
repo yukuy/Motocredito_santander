@@ -15,10 +15,8 @@ class Usuario(db.Model):
 
     motos = db.relationship('Motos', backref=db.backref('usuario', lazy=True))
 
-    # Relación con las valoraciones recibidas como vendedor, con overlaps
-    valoraciones_vendedor = db.relationship('Valoraciones', foreign_keys='Valoraciones.vendedor_id', backref='vendedor', lazy=True, overlaps="vendedor_usuario")
-
-    fecha_registro = db.Column(db.DateTime, default=datetime.utcnow)
+    # Relación con las valoraciones recibidas como vendedor
+    valoraciones_vendedor = db.relationship('Valoraciones', foreign_keys='Valoraciones.vendedor_id', backref='vendedor', lazy=True)
 
     def set_password(self, password):
         self.clave = generate_password_hash(password)
@@ -31,10 +29,8 @@ class Valoraciones(db.Model):
     vendedor_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
     comprador_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
     calificacion = db.Column(db.Integer, nullable=False)  # Valor entre 1 y 5 estrellas
-    
     # Relación con el comprador (usuario que deja la valoración)
     comprador = db.relationship('Usuario', foreign_keys=[comprador_id])
-    
 
 class Motos(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
