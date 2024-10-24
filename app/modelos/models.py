@@ -18,12 +18,6 @@ class Usuario(db.Model):
     # Relación con las valoraciones recibidas como vendedor
     valoraciones_vendedor = db.relationship('Valoraciones', foreign_keys='Valoraciones.vendedor_id', backref='vendedor', lazy=True)
 
-    def set_password(self, password):
-        self.clave = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.clave, password)
-    
 class Valoraciones(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     vendedor_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)

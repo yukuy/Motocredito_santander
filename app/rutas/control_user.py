@@ -10,8 +10,8 @@ def register():
     if request.method == 'POST':
         nombre = request.form['nombre']
         correo = request.form['correo']
-        password = request.form['password']
         telefono = request.form['telefono']
+        clave = request.form['clave']
         foto = None
         
          # Agregar foto
@@ -28,14 +28,18 @@ def register():
         else:
             foto = 'static/uploads/perfil.jpg'
 
+        # Hash de la contraseña utilizando un método específico
+        clave_hash = generate_password_hash(clave, method='pbkdf2:sha256', salt_length=8)
+
         # Verificar si es el primer usuario en registrarse
         if Usuario.query.count() == 0:
             role = 'admin'
         else:
             role = 'cliente'
             
-        nuevo_usuario = Usuario(nombre=nombre, correo=correo, role=role, telefono=telefono, foto=foto)
-        nuevo_usuario.set_password(password)
+        
+            
+        nuevo_usuario = Usuario(nombre=nombre, correo=correo, role=role, clave=clave_hash, telefono=telefono, foto=foto)
         db.session.add(nuevo_usuario)
         db.session.commit()
         flash('Registro exitoso. Puedes iniciar sesión ahora.', 'success')
@@ -55,12 +59,14 @@ def login():
             return redirect(url_for('admin_dashboard'))
         else:
             return redirect(url_for('cliente_dashboard'))
+        
     if request.method == 'POST':
         correo = request.form['correo']
-        password = request.form['password']
+        clave = request.form['clave']
+        
+        # Buscar el usuario por correo
         usuario = Usuario.query.filter_by(correo=correo).first()
-
-        if usuario and usuario.check_password(password):
+        if usuario and check_password_hash(usuario.clave, clave):
             session['user_id'] = usuario.id
             session['user_nombre'] = usuario.nombre
             session['user_role'] = usuario.role
