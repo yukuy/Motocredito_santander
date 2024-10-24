@@ -3,7 +3,7 @@ from datetime import timedelta
 import cloudinary
 
 class config:
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///motocredito.db'  # Cambia a SQLite con un archivo local llamado database.db
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///motocredito_santander.db'  # Cambia a SQLite con un archivo local llamado database.db
     #SQLALCHEMY_DATABASE_URI = 'mysql://root:XRTnRVbWgPTtlswlefTIjOLbIIofBoeD@junction.proxy.rlwy.net:44862/railway'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = secrets.token_hex(16)  # Genera una clave secreta aleatoria
