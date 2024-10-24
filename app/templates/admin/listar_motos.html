@@ -110,7 +110,7 @@
     {% extends "admin/admin_dashboard.html" %}
     {% block content %}
     <h1>Mis Motos</h1>
-    <a class="add-moto" href="{{url_for('add_moto') }}">Agregar Nueva Moto</a>
+    <a class="add-moto" href="{{ url_for('add_moto') }}">Agregar Nueva Moto</a>
     <br>
     <br>
     <div class="moto-container">
@@ -119,18 +119,17 @@
             <h3>{{ moto.nombre }}</h3>
             <p>Precio: {{ moto.precio }}</p>
             <p>Disponibles: {{ moto.cantidad }}</p>
-            {% if moto.foto %}
-                <img src="{{ moto.foto }}" alt="Foto de {{ moto.nombre }}">
-            {% else %}
-                <p>No disponible</p>
-            {% endif %}
+            
+            <!-- Mostrar la primera imagen de la moto -->
+            <img src="{{ moto.foto_principal }}" alt="Foto de {{ moto.nombre }}">
+            
             <a href="{{ url_for('edit_moto', id=moto.id) }}">Editar</a>
-            <form action="{{ url_for('delete_moto', id=moto.id) }}"method="post" onclick="return confirm('¿Estás seguro de que quieres eliminar esta moto?')">
+            <form action="{{ url_for('delete_moto', id=moto.id) }}" method="post" onclick="return confirm('¿Estás seguro de que quieres eliminar esta moto?')">
                 <button type="submit">Eliminar</button>
             </form>
         </div>
         {% endfor %}
     </div>
-    {% endblock content %}
+    {% endblock %}
 </body>
 </html>

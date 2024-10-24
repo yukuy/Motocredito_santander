@@ -129,14 +129,8 @@
                 <input type="number" id="precio" name="precio" value="{{ motos.precio }}" required><br>
 
                 <label for="foto">Foto:</label>
-                <input type="file" id="foto" name="foto" accept="image/*"><br>
-                {% if motos.foto %}
-                <img src="{{ url_for('static', filename='uploads/' ~ motos.foto) }}" alt="Foto de {{ motos.nombre }}" width="100"><br>
-                {% endif %}
-
-                <label for="video_url">Enlace del video promocional:</label>
-                <input type="text" name="video_url" value="{{ motos.video_url }}" placeholder="URL del video de YouTube"><br>
-
+                <input type="file" id="fotos" name="fotos" accept="image/*" multiple><br>
+                                
                 <label for="descripcion">Descripción:</label>
                 <textarea id="descripcion" name="descripcion" required>{{ motos.descripcion }}</textarea><br>
 

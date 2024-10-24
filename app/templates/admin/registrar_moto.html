@@ -110,29 +110,30 @@
             <form method="post" enctype="multipart/form-data">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required><br>
-
+    
                 <label for="marca">Marca:</label>
                 <input type="text" id="marca" name="marca" required><br>
-
+    
                 <label for="cilindrada">Cilindrada:</label>
                 <input type="text" id="cilindrada" name="cilindrada" required><br>
-
+    
                 <label for="cantidad">Cantidad:</label>
                 <input type="number" id="cantidad" name="cantidad" required><br>
-
+    
                 <label for="precio">Precio:</label>
                 <input type="number" id="precio" name="precio" required><br>
-
-                <label for="foto">Foto:</label>
-                <input type="file" id="foto" name="foto"><br>
-
+    
+                <label for="fotos">Fotos:</label>
+                <input type="file" id="fotos" name="fotos" accept="image/*" multiple><br>
+    
                 <label for="descripcion">Descripción:</label>
                 <textarea name="descripcion" placeholder="Descripción de la moto:"></textarea>
-
+    
                 <button type="submit">Agregar Moto</button>
             </form>
         </div>
     </div>
+    
     <!-- Bootstrap JS and dependencies (jQuery and Popper.js) -->
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

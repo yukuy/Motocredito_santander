@@ -1,6 +1,6 @@
 from flask import render_template, request, session
 from app import app
-from app.modelos.models import Motos, Usuario, db
+from app.modelos.models import Motos, Usuario, MotoFotos, db
 import json
 import os
 from sqlalchemy.exc import SQLAlchemyError
@@ -52,10 +52,12 @@ def buscar_motos1():
                 historial_busqueda.pop(0)
             guardar_historial(user_id, query)  # Asegúrate de pasar el user_id también al guardar
 
+        # Obtener las fotos para cada moto
+        fotos = {moto.id: MotoFotos.query.filter_by(moto_id=moto.id).all() for moto in motos}
     else:
         motos = []
-
-    return render_template('cliente/resultados1.html', motos=motos, user_nombre=session.get('user_nombre'))
+        fotos = {}
+    return render_template('cliente/resultados1.html', motos=motos, fotos=fotos, user_nombre=session.get('user_nombre'))
 
 
 @app.route('/historial1')

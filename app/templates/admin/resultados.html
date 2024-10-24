@@ -104,24 +104,30 @@
 
                 <div class="moto-container">
                     {% for moto in motos %}
-                        <div class="card">
-                            <p>Nombre: {{ moto.nombre }}</p>
-                            <p>Cantidad: {{ moto.cantidad }}</p>
+                    <div class="card">
+                        <div class="moto-item">
+                            <h3>{{ moto.nombre }}</h3>
                             <p>Precio: {{ moto.precio }}</p>
-                            {% if moto.foto %}
-                                <a href="{{ url_for('ver_comentarios', moto_id=moto.id) }}">
-                                    <img src="{{ moto.foto }}" alt="Foto de {{ moto.nombre }}"
-                                        alt="Foto de {{ moto.nombre }}" 
-                                        class="moto-img">
-                                </a>
-                            {% else %}
-                                <a href="{{ url_for('ver_comentarios', moto_id=moto.id) }}">
-                                    <p>No disponible</p>
-                                </a>
-                            {% endif %}
+                            <a href="{{ url_for('ver_comentarios', moto_id=moto.id) }}">
+                                {% if fotos[moto.id] and fotos[moto.id]|length > 0 %}
+                                    <!-- Carrusel de imágenes sin flechas, con reproducción automática -->
+                                    <div id="carouselMoto{{ moto.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="false">
+                                        <div class="carousel-inner">
+                                            {% for foto in fotos[moto.id] %}
+                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                                <img src="{{ foto.foto_url }}" class="d-block w-100" alt="Foto de {{ moto.nombre }}">
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <img src="ruta/a/imagen/predeterminada.jpg" alt="No disponible">
+                                {% endif %}
+                            </a>
                         </div>
+                    </div>
                     {% endfor %}
-                </div>
+                </div> 
             {% endif %}
         </div>
     {% endblock %}

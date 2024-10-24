@@ -245,14 +245,19 @@
         <div class="moto-details">
             <h1>Información de {{ moto.nombre }}</h1>
 
-            <!-- Verificar si hay un video -->
-            {% if video_url %}
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="{{ video_url }}" allow="autoplay; fullscreen"></iframe>
+            {% if fotos and fotos|length > 0 %}
+                <!-- Carrusel de imágenes sin flechas, con reproducción automática -->
+                <div id="carouselMoto{{ moto.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="false">
+                    <div class="carousel-inner">
+                        {% for foto in fotos %}
+                        <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                            <img src="{{ foto.foto_url }}" class="d-block w-100" alt="Foto de {{ moto.nombre }}">
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             {% else %}
-                <!-- Si no hay video, mostrar la imagen de la moto -->
-                <img src="{{ moto.foto }}" alt="Foto de {{ moto.nombre }}" style="max-width: 100%; height: auto;">
+                <img src="/ruta/a/imagen/predeterminada.jpg" alt="No disponible">
             {% endif %}
             
             <p>Precio: {{ moto.precio }}</p>

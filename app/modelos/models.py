@@ -44,7 +44,15 @@ class Motos(db.Model):
     marca = db.Column(db.String(45))        # Campo para la marca de la moto
     cilindrada = db.Column(db.Integer)      # Campo para la cilindrada de la moto
 
+    fotos = db.relationship('MotoFotos', backref='moto', lazy=True)
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
+    
+    
+class MotoFotos(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    moto_id = db.Column(db.Integer, db.ForeignKey('motos.id'))
+    foto_url = db.Column(db.String(255))
+
 
 class Comentarios(db.Model):
     id = db.Column(db.Integer, primary_key=True)

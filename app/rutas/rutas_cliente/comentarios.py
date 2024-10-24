@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request, flash, session
 from app import app
 from datetime import datetime
-from app.modelos.models import Motos, Comentarios, Usuario, db
+from app.modelos.models import Motos, Comentarios, Usuario, MotoFotos, db
 
 # Ruta para los comentarios
 @app.route('/ad_comentario/<int:moto_id>', methods=['POST'])
@@ -37,6 +37,9 @@ def info_moto(moto_id):
     # Obtener la moto
     moto = Motos.query.get_or_404(moto_id)
     
+    # Obtener las fotos de la moto
+    fotos = MotoFotos.query.filter_by(moto_id=moto.id).all()
+    
     # Obtener los comentarios asociados a la moto
     comentarios = Comentarios.query.filter_by(idMotos=moto_id).all()
     
@@ -45,5 +48,5 @@ def info_moto(moto_id):
 
 
 
-    return render_template('cliente/info_motos.html', moto=moto, comentarios=comentarios, 
+    return render_template('cliente/info_motos.html', moto=moto, fotos=fotos, comentarios=comentarios, 
                            vendedor=vendedor, datetime=datetime)
