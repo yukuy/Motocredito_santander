@@ -3,11 +3,10 @@ from datetime import timedelta
 import cloudinary
 
 class config:
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///motocredito.db'  # Cambia a SQLite con un archivo local llamado database.db
-    #SQLALCHEMY_DATABASE_URI = 'mysql://root:XRTnRVbWgPTtlswlefTIjOLbIIofBoeD@junction.proxy.rlwy.net:44862/railway'
+    # Configura la base de datos PostgreSQL de Supabase
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres.cdrrwdbmcqkvrfjmcshn:E3TKDY2axEeZ3Nck@aws-0-us-west-1.pooler.supabase.com:6543/postgres'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = secrets.token_hex(16)  # Genera una clave secreta aleatoria
-    SECRET_KEY = 'tu_clave_secreta_fija_aqui'
+    SECRET_KEY = 'tu_clave_secreta_fija_aqui'  
     PERMANENT_SESSION_LIFETIME = timedelta(days=7)
     
 # Configuración de Cloudinary
